@@ -11,7 +11,7 @@ export default function svg2marker(
   svgPath: string,
   markerCfg: { x: number; y: number; r: number },
   viewBoxWidth: number = 1024,
-  viewBoxHeight: number = 2014,
+  viewBoxHeight: number = 1014,
 ): (string | number)[][] {
   const { x, y, r } = markerCfg;
   // tslint:disable-next-line:no-unsafe-any

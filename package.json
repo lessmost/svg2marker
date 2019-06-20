@@ -1,0 +1,38 @@
+{
+  "name": "@alipay/svg2marker",
+  "version": "0.0.1",
+  "description": "Parse SVG path to G/Marker path array",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "authors": {
+    "name": "lingdao.lzq",
+    "email": "lingdao.lzq@alipay.com"
+  },
+  "repository": "git@gitlab.alipay-inc.com:eva-engine/svg2marker.git",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "precommit": "npm run lint -q && npm run prettier-check -q",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "prettier-check": "prettier --list-different 'src/**/*.{ts,tsx,js,jsx}'",
+    "dev": "umi-lib doc dev",
+    "build": "umi-lib build"
+  },
+  "devDependencies": {
+    "husky": "^2.4.1",
+    "prettier": "^1.18.2",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typescript": "^3.3.3",
+    "umi-library": "^1.1.1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "svg-path-parser": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://registry.npm.alibaba-inc.com"
+  }
+}

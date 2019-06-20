@@ -1,10 +1,15 @@
 {
   "name": "@alipay/svg2marker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Parse SVG path to G/Marker path array",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist"
+  ],
   "authors": {
     "name": "lingdao.lzq",
     "email": "lingdao.lzq@alipay.com"

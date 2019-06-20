@@ -3,8 +3,6 @@ import svgPathParser from 'svg-path-parser';
 
 // tslint:disable-next-line:no-unsafe-any
 const parser: (path: string) => ISVGPathCmd[] = memoize(svgPathParser);
-// tslint:disable-next-line:no-any
-const resolver: (...args: any[]) => string = (...args: any[]): string => JSON.stringify(args);
 
 /**
  *  Function to parse svg path to path array need by Marker symbol
@@ -13,7 +11,7 @@ const resolver: (...args: any[]) => string = (...args: any[]): string => JSON.st
  * @param viewBoxWidth SVG view box width, default to 1024
  * @param viewBoxHeight SVG view box height, default to 1024
  */
-function svg2markerFn(
+export function svg2marker(
   svgPath: string,
   markerCfg: IMarkerCfg,
   viewBoxWidth: number = 1024,
@@ -48,7 +46,7 @@ function svg2markerFn(
   });
 }
 
-function iconfont2markerFn(icon: string, markCfg: IMarkerCfg): (string | number)[][] {
+export function iconfont2marker(icon: string, markCfg: IMarkerCfg): (string | number)[][] {
   const pathMatch: RegExpMatchArray | null = /<path\s+d="(.*?)"/i.exec(icon);
   const viewBoxMatch: RegExpExecArray | null = /viewBox="\d+\s+\d+\s+(\d+)\s+(\d+)"/i.exec(icon);
   if (pathMatch === null || pathMatch.length < 2) {
@@ -65,11 +63,9 @@ function iconfont2markerFn(icon: string, markCfg: IMarkerCfg): (string | number)
     }
   }
 
-  return svg2markerFn(pathMatch[1], markCfg, width, height);
+  return svg2marker(pathMatch[1], markCfg, width, height);
 }
 
-export const svg2marker: typeof svg2markerFn = memoize(svg2markerFn, resolver);
-export const iconfont2marker: typeof iconfont2markerFn = memoize(iconfont2markerFn, resolver);
 export default svg2marker;
 
 type IMarkerCfg = {

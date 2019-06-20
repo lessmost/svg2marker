@@ -4,7 +4,8 @@
   "jsRules": {},
   "rules": {
     "no-default-export": false,
-    "no-relative-imports": false
+    "no-relative-imports": false,
+    "no-submodule-imports": false
   },
   "rulesDirectory": []
 }

@@ -1,6 +1,6 @@
 {
   "name": "@alipay/svg2marker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Parse SVG path to G/Marker path array",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -24,6 +24,7 @@
     "build": "umi-lib build"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.134",
     "husky": "^2.4.1",
     "prettier": "^1.18.2",
     "tslint": "^5.17.0",
@@ -34,6 +35,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "lodash": "^4.17.11",
     "svg-path-parser": "^1.1.0"
   },
   "publishConfig": {

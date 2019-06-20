@@ -1,4 +1,10 @@
+import { memoize } from 'lodash';
 import svgPathParser from 'svg-path-parser';
+
+// tslint:disable-next-line:no-unsafe-any
+const parser: (path: string) => ISVGPathCmd[] = memoize(svgPathParser);
+// tslint:disable-next-line:no-any
+const resolver: (...args: any[]) => string = (...args: any[]): string => JSON.stringify(args);
 
 /**
  *  Function to parse svg path to path array need by Marker symbol
@@ -7,15 +13,14 @@ import svgPathParser from 'svg-path-parser';
  * @param viewBoxWidth SVG view box width, default to 1024
  * @param viewBoxHeight SVG view box height, default to 1024
  */
-export default function svg2marker(
+function svg2markerFn(
   svgPath: string,
-  markerCfg: { x: number; y: number; r: number },
+  markerCfg: IMarkerCfg,
   viewBoxWidth: number = 1024,
   viewBoxHeight: number = 1014,
 ): (string | number)[][] {
   const { x, y, r } = markerCfg;
-  // tslint:disable-next-line:no-unsafe-any
-  const paths: ISVGPathCmd[] = svgPathParser(svgPath);
+  const paths: ISVGPathCmd[] = parser(svgPath);
 
   return paths.map((path: ISVGPathCmd) => {
     const arr: (string | number)[] = [];
@@ -42,6 +47,36 @@ export default function svg2marker(
     return arr;
   });
 }
+
+function iconfont2markerFn(icon: string, markCfg: IMarkerCfg): (string | number)[][] {
+  const pathMatch: RegExpMatchArray | null = /<path\s+d="(.*?)"/i.exec(icon);
+  const viewBoxMatch: RegExpExecArray | null = /viewBox="\d+\s+\d+\s+(\d+)\s+(\d+)"/i.exec(icon);
+  if (pathMatch === null || pathMatch.length < 2) {
+    return [];
+  }
+  let width: number = 1024;
+  let height: number = 1024;
+  if (viewBoxMatch !== null && viewBoxMatch.length >= 3) {
+    if (!isNaN(parseInt(viewBoxMatch[1], 10))) {
+      width = parseInt(viewBoxMatch[1], 10);
+    }
+    if (!isNaN(parseInt(viewBoxMatch[2], 10))) {
+      height = parseInt(viewBoxMatch[2], 10);
+    }
+  }
+
+  return svg2markerFn(pathMatch[1], markCfg, width, height);
+}
+
+export const svg2marker: typeof svg2markerFn = memoize(svg2markerFn, resolver);
+export const iconfont2marker: typeof iconfont2markerFn = memoize(iconfont2markerFn, resolver);
+export default svg2marker;
+
+type IMarkerCfg = {
+  x: number;
+  y: number;
+  r: number;
+};
 
 type IPointPair = [number | undefined, number | undefined];
 

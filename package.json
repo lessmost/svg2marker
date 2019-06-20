@@ -1,6 +1,6 @@
 {
   "name": "@alipay/svg2marker",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Parse SVG path to G/Marker path array",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

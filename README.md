@@ -46,6 +46,15 @@ container.addShape('Marker', {
 });
 ```
 
+## FAQ
+- 为什么报错`${symbol} marker is not supported.`？
+
+因为注册的G和绘图的G不一致导致的，应该改为同一个G引用
+```js
+ import { G } from '@antv/g6';
+ import { G } from '@antv/g2';
+ 
+```
 ## LICENSE
 
 MIT

@@ -1,6 +1,6 @@
 {
-  "name": "@alipay/svg2marker",
-  "version": "0.1.3",
+  "name": "svg2marker",
+  "version": "0.1.0",
   "description": "Parse SVG path to G/Marker path array",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -11,10 +11,13 @@
     "dist"
   ],
   "authors": {
-    "name": "lingdao.lzq",
-    "email": "lingdao.lzq@alipay.com"
+    "name": "zqlu",
+    "email": "zqlu.cn@gmail.com"
   },
-  "repository": "git@gitlab.alipay-inc.com:eva-engine/svg2marker.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zqlu/svg2marker"
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "precommit": "npm run lint -q && npm run prettier-check -q",
@@ -37,9 +40,5 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "svg-path-parser": "^1.1.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "http://registry.npm.alibaba-inc.com"
   }
 }
